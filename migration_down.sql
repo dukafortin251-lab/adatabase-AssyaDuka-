@@ -1,1 +1,3 @@
-Nom             | Description       | Type.         | Taille        | Contr
+DROP Table Categorie;
+
+DROP TABLE Personne;

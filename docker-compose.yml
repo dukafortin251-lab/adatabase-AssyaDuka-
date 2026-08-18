@@ -11,7 +11,7 @@ services:
       POSTGRES_PASSWORD: ada
       POSTGRES_DB: adatabase
     ports:
-      - "5432:5432"
+      - "5438:5432"
     volumes:
       - ./adatabase.sql:/docker-entrypoint-initdb.d/01-adatabase.sql
       - adatabase-data:/var/lib/postgresql/data
