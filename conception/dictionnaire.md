@@ -60,3 +60,31 @@ participation              Presence                         Boolean          Max
 
 
 
+tous r1
+
+categorie(id categorie) R1 
+
+vente (id vente, date de vente, mode de payement)R1
+
+
+benevole(id benevole, nom, prenom, telephone, dateArrivee, #idreparation) R2
+ 
+benevolePossedeCompetence (#idCommpetence,#idBenevole)R3
+
+competence (idCompetence, libelle,)
+
+
+atelier (idAtelier, date, nombre de place, #idbenevole participation) R1+R2
+
+inscriptionAtelierPersonne (#idatelier, #idpersonne, datedincription, participation) R3
+
+objet (idObjet , categorie, etat, poids, parcours,#iddepot, #idvente prixpaye, prix objet, datemiseenrayon) R2 
+
+
+Depot (idDepot, typeDepot, #idPersonne, dateDeDepot) R2
+
+
+reparation(atelier, benevole, date, echecDereparation) 
+
+
+Personne (idPersonne telephone, nom, adherente)  

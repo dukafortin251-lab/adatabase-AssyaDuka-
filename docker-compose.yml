@@ -9,7 +9,7 @@ services:
     environment:
       POSTGRES_USER: ada
       POSTGRES_PASSWORD: ada
-      POSTGRES_DB: adakor
+      POSTGRES_DB: adatabase
     ports:
       - "5432:5432"
     volumes:
