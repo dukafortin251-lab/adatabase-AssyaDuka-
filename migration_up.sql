@@ -1,4 +1,3 @@
--- 1. Tables indépendantes
 CREATE TABLE Categorie (
     idCategorie INT PRIMARY KEY,
     libelle VARCHAR(100) NOT NULL
@@ -81,5 +80,5 @@ CREATE TABLE Reparation (
 );
 
 ALTER TABLE Benevole
-ADD FOREIGN KEY (idReparation) REFERENCES Reparation(idReparation);
-
+ADD CONSTRAINT fk_benevole_reparation 
+FOREIGN KEY (idReparation) REFERENCES Reparation(idReparation);
