@@ -41,4 +41,5 @@ INSERT INTO Objet (idObjet, idCategorie, etat, poids, parcours, idDepot, idVente
 (4, 2, 'hors service', 8.50, 'Recyclage', 2, NULL, NULL, NULL, NULL);
 
 
-INSERT INTO Benevole 
+INSERT INTO Benevole
+
