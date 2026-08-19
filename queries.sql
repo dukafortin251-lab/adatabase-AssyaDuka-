@@ -72,17 +72,59 @@
 
 
 --(6) Quelles personnes nous ont fait plus de trois dépôts ?
-SELECT 
-    idBenevole,
-    COUNT(*) AS total_reparations,
-    SUM(CASE WHEN echecDeReparation = FALSE THEN 1 ELSE 0 END) AS reussites,
-    ROUND(SUM(CASE WHEN echecDeReparation = FALSE THEN 1.0 ELSE 0 END) / COUNT(*) * 100, 2) AS taux_reussite
-FROM Reparation
-GROUP BY idBenevole;
+-- SELECT 
+--     idBenevole,
+--     COUNT(*) AS total_reparations,
+--     SUM(CASE WHEN echecDeReparation = FALSE THEN 1 ELSE 0 END) AS reussites,
+--     ROUND(SUM(CASE WHEN echecDeReparation = FALSE THEN 1.0 ELSE 0 END) / COUNT(*) * 100, 2) AS taux_reussite
+-- FROM Reparation
+-- GROUP BY idBenevole;
 
 
---Quel poids total avons-nous détourné de la déchetterie (tout ce qui n'est pas recyclé) ?
+--(7) Quel poids total avons-nous détourné de la déchetterie (tout ce qui n'est pas recyclé) ?
 -- SELECT 
 --     SUM(poids) AS poids_total_detourne_kg
 -- FROM Objet
 -- WHERE LOWER(statut) NOT IN ('recyclé', 'recycle', 'jeté', 'jete', 'déchetterie', 'dechetterie');
+
+
+--(8) Quel est le taux de présence réelle sur nos ateliers ?
+-- SELECT 
+--     ROUND(
+--         COUNT(*) FILTER (WHERE participation = 'Présent') * 100.0 / COUNT(*),
+--         2
+--     ) AS taux_presence
+-- FROM InscriptionAtelierPersonne;
+
+--(9) Quels bénévoles ont la compétence « électricité » et sont disponibles pour animer un atelier ?
+-- SELECT 
+--     b.idBenevole,
+--     b.nom,
+--     b.prenom,
+--     c.libelle AS competence
+-- FROM Benevole b
+-- JOIN BenevolePossedeCompetence bpc
+--     ON b.idBenevole = bpc.idBenevole
+-- JOIN Competence c
+--     ON bpc.idCompetence = c.idCompetence
+-- WHERE c.libelle = 'Électricité'
+-- AND b.idBenevole NOT IN (
+--     SELECT idBenevoleParticipation
+--     FROM Atelier
+--     WHERE idBenevoleParticipation IS NOT NULL
+--     AND dateAtelier >= CURRENT_DATE
+-- );
+
+
+--(10) Quels objets sont en rayon depuis plus de six mois et devraient être sortis ?
+-- SELECT 
+--     o.idObjet,
+--     c.libelle AS categorie,
+--     o.dateMiseEnRayon,
+--     o.poids,
+--     (CURRENT_DATE - o.dateMiseEnRayon) AS jours_en_rayon
+-- FROM Objet o
+-- JOIN Categorie c 
+--     ON o.idCategorie = c.idCategorie
+-- WHERE o.parcours = 'En rayon'
+--   AND o.dateMiseEnRayon < CURRENT_DATE - INTERVAL '6 months';
