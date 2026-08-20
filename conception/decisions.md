@@ -1,13 +1,8 @@
-# Decisions d'Architecture - Projet ADATABASE ASSYADUKA
+Bénévole / Réparation : il y a une dépendance circulaire, donc idReparation peut être NULL au départ puis mis à jour après la création de la réparation.
 
-## 1. Contrainte de référence circulaire (Benevole / Reparation)
-* **Contexte** : Une dépendance croisée existe entre `Benevole` et `Reparation`.
-* **Décision** : La clé étrangère `idReparation` dans `Benevole` est rendue optionnelle (`NULL`) à l'insertion initiale. Elle est mise à jour via un `UPDATE` une fois la réparation enregistrée. Les scripts de suppression utilisent `ALTER TABLE ... DROP CONSTRAINT` pour éviter les blocages de dépendance.
 
-## 2. Découpage du parcours et des états des objets
-* **Contexte** : Nécessité de suivre l'évolution d'un objet remis à l'association.
-* **Décision** : Utilisation d'un champ texte `parcours` (`En rayon`, `Vendu`, `Recyclage`, `Réemployé`, `En réparation`) combiné aux clés étrangères optionnelles (`idDepot`, `idVente`) pour tracer l'historique complet sans multiplier les tables intermédiaires.
+Parcours des objets : le champ parcours permet de savoir où en est l’objet (En rayon, Vendu, Recyclage, etc.), avec les clés étrangères pour garder la traçabilité.
 
-## 3. Gestion de l'historique des présences en atelier
-* **Contexte** : Différencier l'inscription administrative de la présence effective.
-* **Décision** : Ajout du champ `participation` (`Présent`, `Absent`) dans la table d'association `InscriptionAtelierPersonne` pour mesurer le taux d'assiduité réel.
+
+
+Présence aux ateliers : le champ participation permet de différencier une personne inscrite d’une personne réellement présente ou absente.

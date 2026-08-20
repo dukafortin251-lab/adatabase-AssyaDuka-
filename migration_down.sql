@@ -1,4 +1,3 @@
-ALTER TABLE IF EXISTS Benevole DROP CONSTRAINT IF EXISTS Benevole_idReparation_fkey;
 
 DROP TABLE IF EXISTS Reparation CASCADE;
 DROP TABLE IF EXISTS InscriptionAtelierPersonne CASCADE;

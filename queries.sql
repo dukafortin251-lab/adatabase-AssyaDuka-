@@ -11,7 +11,6 @@
 -- 8 objet reçu le mois dernier le poids est de 78?,20Kg
 
 
-
 -- (2) Quels objets sont actuellement en rayon, et depuis combien de temps ?
  
 -- SELECT 
